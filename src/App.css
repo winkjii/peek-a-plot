@@ -8,12 +8,16 @@ body {
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
 
 .navbar {
   width: 100vw;
   min-height: 12vh;
   background: #ffffff;
 }
+
 
 /*.text {
   margin-left: 60px;
@@ -57,7 +61,6 @@ main {
   background-color: black;
   height: 100vh;
   width: 250px;
-  position: fixed;
 }
 
 .menu {
@@ -77,5 +80,14 @@ main {
   padding: 10px 40px;
   transition: all 0.3s;
 }
+
+.home_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
 
 

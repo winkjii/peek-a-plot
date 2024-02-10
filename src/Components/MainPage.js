@@ -30,6 +30,7 @@ const MainPage = () => {
         {/* heading section */}
           <div className="header">
             <Navbar />
+            
           </div>
       </div>
     </React.Fragment>

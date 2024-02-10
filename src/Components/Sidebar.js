@@ -45,7 +45,21 @@ import logo_ghost from '../assets/Ghost-003.png'
 
 import React from 'react'
 
-export default function Sidebar() {
+export default function Sidebar({children}) {
+  const menuItem =[
+    {
+      "title": "Home",
+      path: "/"
+    },
+    {
+      title: "Lists",
+      path: "/lists"
+    },
+    {
+      title: "Profile",
+      path: "/profile"
+    }
+  ];
   return (
     <div className='container_1'>
       <div className='sidebar'>
@@ -53,7 +67,7 @@ export default function Sidebar() {
         <div className='menu'>
           <div>
             {
-              SidebarData.map((item, index)=> (
+               menuItem.map((item, index)=> (
                 <NavLink to={item.path} key={index}
                 className="link">
                   <div className='link_title'>{item.title}</div>
@@ -64,6 +78,7 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
+      <main>{children}</main>
     </div>
   )
 }
