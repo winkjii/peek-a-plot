@@ -1,0 +1,74 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.navbarRight {
+  width: 400;
+  display: flex;
+  justify-items: space-between;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  justify-content: space-between;
+  padding-left: 50;
+  padding-right: 150;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40;
+}
+
+.headerTxt {
+  color: white;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    margin: 20;
+    margin-left: 70;
+    margin-right: 70;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center,
+}
+
+.descriptionTitle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.howto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dataContainer {
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

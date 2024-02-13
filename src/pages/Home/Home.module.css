@@ -1,0 +1,20 @@
+/* ---------------- Search Input ------------------ */
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 5px 20px;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.searchBox input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: black;
+    font-size: 18px;
+    max-width: 250px;   
+    height: 30px;
+}

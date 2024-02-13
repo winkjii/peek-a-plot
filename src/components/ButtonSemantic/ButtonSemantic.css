@@ -1,0 +1,20 @@
+.buttonSemantic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.buttonSemantic:active {
+    opacity: 0.5;
+}
+
+.buttonSemantic.black {
+    background-color: black;
+    color: white;
+}
+
+.buttonSemantic.white {
+    background-color: white;
+    color: black;
+}

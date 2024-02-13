@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    height: 70px;
+    color: white;
+}
+
+.containerComponent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    height: 70px;
+    color: white;
+}

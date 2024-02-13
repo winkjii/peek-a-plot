@@ -1,0 +1,31 @@
+.container_1 {
+  display: flex;
+}
+
+.sidebar {
+  background-color: black;
+  height: 100vh;
+  width: 250px;
+}
+
+.menu {
+  display: flex;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  font-size: 25px;
+  height: 80%;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.link_title {
+  padding: 10px 40px;
+  transition: all 0.3s;
+}
+
+.children {
+  width: 100%;
+}
