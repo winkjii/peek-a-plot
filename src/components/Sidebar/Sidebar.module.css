@@ -9,7 +9,8 @@
 }
 
 .menu {
-  display: flex;
+  display:block;
+  margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 30px;
   font-size: 25px;
@@ -28,4 +29,14 @@
 
 .children {
   width: 100%;
+}
+
+.bottombar {
+  margin-top: 500px;
+  margin-left: 0;
+}
+
+.b_signout {
+  margin-left: 45px;
+  font-size: medium;
 }

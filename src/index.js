@@ -11,6 +11,8 @@ import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
 import Home from './pages/Home/Home';
 import Lists from './pages/Lists/Lists';
+import Profile from './pages/Profile/Profile';
+import Plot from './pages/Plot/Plot';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
     path: '/lists',
     element: <Lists />
   },
+  {
+    path: '/profile',
+    elements: <Profile/>
+  },
+  {
+    path: '/plot',
+    elements: <Plot/>
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
