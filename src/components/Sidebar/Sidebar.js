@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import styles from './Sidebar.module.css'
+import styles from './Sidebar.module.css';
 import logo from '../../assets/logo.png';
 import { Link } from "react-router-dom";
 import ButtonSemantic from "../../components/ButtonSemantic/ButtonSemantic";
