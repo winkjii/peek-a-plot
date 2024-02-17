@@ -19,13 +19,12 @@ const SignIn = () => {
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-        <text className="title">Sign In</text>
+        <text className={styles.title}>Sign in</text>
         <div className={styles.inputContainer}>
           <text className={styles.inputLabel}>Email</text>
           <input
             className={styles.input}
             placeholder="Email"
-            value={email}
             onChange={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
@@ -37,16 +36,18 @@ const SignIn = () => {
             type="password"
             className={styles.input}
             placeholder="Password"
-            value={password}
             onChange={setPassword}
             secureTextEntry
           />
         </div>
         <ButtonSemantic
-          title="Sign In"
+          title="Sign in"
           onClick={handleSignIn}
           theme={"black"}
-          fontWeight={"bold"}
+          fontWeight={700}
+          fontSize={14}
+          width={180}
+          height={32}
         />
         <div className={styles.forgot} onClick={handleForgotPassword}>Forgot Password?</div>
       </div>

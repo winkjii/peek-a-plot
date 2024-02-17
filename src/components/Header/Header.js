@@ -5,7 +5,7 @@ const Header = ({ title, component }) => {
   return (
     <div className={component ? styles.containerComponent : styles.container}>
     {console.log(component)}
-      {title}
+      <div className={styles.title}>{title}</div>
       {component}
     </div>
   );

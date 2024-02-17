@@ -1,69 +1,42 @@
-body {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+.container {
+    max-width: 100%;
   }
 
 .form_container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
+    margin: 40px 30px 0px 30px;
 }
 
 textarea {
-    resize: none; 
+    resize: none;
+    border-width: 1px;
     border-radius: 20px;
     padding: 10px;
+    margin-bottom: 20px;
   }
 
-.title_1 {
-    font-size: 30px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-right: 1220px;
+.title {
+    font-size: 24px;
+    font-family: 'Inter';
+    font-weight: 500;
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 
-.describe1 {
-    margin-right: 1030px;
+.describe {
+    font-size: 16px;
+    font-family: 'Inter';
+    font-weight: 300;
+    margin-left: 20px;
+    margin-bottom: 15px;
+
 }
 
-.title_2 {
-    font-size: 30px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-right: 1200px;
-    margin-top: 20px;
+.buttonContainer {
+    display: flex;
+    justify-content: center;
 }
-
-.describe2 {
-    margin-right: 890px;
-}
-
-.title_3 {
-    font-size: 30px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-right: 1170px;
-    margin-top: 20px;
-}
-
-.describe3 {
-    margin-right: 1090px;
-}
-
-.title_4 {
-    font-size: 30px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-right: 1190px;
-    margin-top: 20px;
-}
-
-.describe4 {
-    margin-right: 870px;
-}
-
 button[type="submit"] {
     background-color: black;
     border-radius: 40px;

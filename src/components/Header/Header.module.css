@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     background-color: black;
-    height: 70px;
+    height: 90px;
     color: white;
 }
 
@@ -12,6 +12,13 @@
     justify-content: space-between;
     align-items: center;
     background-color: black;
-    height: 70px;
+    height: 90px;
     color: white;
+    padding: 0px 20px;
+}
+
+.title {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 20px;
 }

@@ -2,73 +2,129 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 20px;
+  align-items: center;
+  margin: 15px 45px;
+}
+
+.appName {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .navbarRight {
-  width: 400;
+  width: 400px;
   display: flex;
-  justify-items: space-between;
   justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
 }
 
 .header {
+  height: 300px;
   display: flex;
   flex-direction: row;
   background-color: black;
   justify-content: space-between;
-  padding-left: 50;
-  padding-right: 150;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 150px;
+}
+
+.headerLeft {
+  /* margin-bottom: 20px; */
 }
 
 .text {
   display: flex;
   flex-direction: column;
-  margin-top: 40;
+  margin-bottom: 40px;
 }
 
 .headerTxt {
   color: white;
   font-size: 45px;
   font-weight: bold;
+  font-family: "Inter";
+  font-weight: 900;
+}
+
+.navbarTxt {
+  font-family: "Inter";
+  font-size: 13px;
+  /* font-weight: 400; */
 }
 
 .description {
-    display: flex;
-    flex-direction: column;
-    margin: 20;
-    margin-left: 70;
-    margin-right: 70;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px;
+  margin-bottom: 40px;
+}
+
+.contentDescription {
+  text-indent: 40px;
+  margin: 15px 50px;
+  font-family: "Inter";
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.content {
+  margin: 15px 50px;
+  font-family: "Inter";
+  font-weight: 300;
+  font-size: 14px;
 }
 
 .contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center,
-}
-
-.descriptionTitle {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
 }
 
 .howto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
 }
 
+.title {
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 700;
+  /* margin-bottom: 15px; */
+}
 .dataContainer {
-    width: 600px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
 .data {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+text {
+  font-family: "Inter";
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.contactName {
+  font-weight: 500;
+  font-size: 14px;
+  margin: 10px 0px;
+}
+
+.contactData {
+  font-size: 12px;
 }

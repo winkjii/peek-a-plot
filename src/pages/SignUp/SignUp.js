@@ -22,7 +22,7 @@ const SignUp = () => {
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-        <text className={styles.title}>Sign Up</text>
+        <text className={styles.title}>Sign up</text>
         <div className={styles.inputContainer}>
         <text className={styles.inputLabel}>Username</text>
         <input
@@ -63,7 +63,7 @@ const SignUp = () => {
           secureTextEntry
         />
         </div>
-        <ButtonSemantic title="Sign Up" onClick={handleSignUp} theme={'black'}/>
+        <ButtonSemantic title="Sign up" onClick={handleSignUp} theme={'black'}/>
         <div className={styles.signin} onClick={handleSignIn}>Sign in</div>
       </div>
     </div>

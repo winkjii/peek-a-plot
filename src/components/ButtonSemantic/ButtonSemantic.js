@@ -11,6 +11,7 @@ const ButtonSemantic = ({
   margin,
   radius,
   fontWeight,
+  fontSize,
 }) => {
   return (
     <Link
@@ -20,11 +21,12 @@ const ButtonSemantic = ({
       <div
         className={`buttonSemantic ${theme}`}
         style={{
-          width: width ? width : 147,
-          height: height ? height : 30,
+          width: width ? width : 110,
+          height: height ? height : 40,
           margin: margin,
           borderRadius: radius,
           fontWeight: fontWeight,
+          fontSize: fontSize,
         }}
         onClick={onClick}
       >
