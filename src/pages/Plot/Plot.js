@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header/Header'
 import styles from './Plot.module.css'
+import { useNavigate } from 'react-router-dom';
 
 
 const Plot = () => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     plot: "",
@@ -21,6 +23,7 @@ const Plot = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    navigate('/home', {state: {formData}});
   };
 
   return (
