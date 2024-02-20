@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styles from './SignUp.module.css'
 import ButtonSemantic from '../../components/ButtonSemantic/ButtonSemantic';
-
+import { auth } from "../../firebase/firebase"
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -9,8 +11,17 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignUp = () => {
-    console.log('Signing up with:', username, email, password);
+  const navigate = useNavigate()
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      navigate('/sign-in')
+      console.log(userCredential)
+    }).catch((error) => {
+      console.log(error);
+    })
     // Implement your sign-up logic here
   };
 
@@ -29,7 +40,7 @@ const SignUp = () => {
           className={styles.input}
           placeholder="Username"
           value={username}
-          onChange={setUsername}
+          onChange={(e) => setUsername(e.target.value)}
         />
         </div>
         <div className={styles.inputContainer}>
@@ -38,7 +49,7 @@ const SignUp = () => {
           className={styles.input}
           placeholder="Email"
           value={email}
-          onChange={setEmail}
+          onChange={(e) => setEmail(e.target.value)}
           keyboardType="email-address"
           autoCapitalize="none"
         />
@@ -49,7 +60,7 @@ const SignUp = () => {
           className={styles.input}
           placeholder="Password"
           value={password}
-          onChange={setPassword}
+          onChange={(e) => setPassword(e.target.value)}
           secureTextEntry
         />
         </div>
@@ -59,7 +70,7 @@ const SignUp = () => {
           className={styles.input}
           placeholder="Confirm Password"
           value={confirmPassword}
-          onChange={setConfirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           secureTextEntry
         />
         </div>

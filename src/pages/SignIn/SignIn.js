@@ -1,13 +1,31 @@
 import React, { useState } from "react";
 import styles from "./SignIn.module.css";
 import ButtonSemantic from "../../components/ButtonSemantic/ButtonSemantic";
+import { auth } from "../../firebase/firebase"
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = () => {
-    console.log("Signing in with:", email, password);
+  const navigate = useNavigate();
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          navigate('/home');
+        }
+      })
+      console.log(userCredential)
+    }).catch((error) => {
+      console.log(error);
+    })
+    // console.log("Signing in with:", email, password);
     // Implement your sign-in logic here
   };
 
@@ -23,9 +41,11 @@ const SignIn = () => {
         <div className={styles.inputContainer}>
           <text className={styles.inputLabel}>Email</text>
           <input
+            type="email"
             className={styles.input}
             placeholder="Email"
-            onChange={setEmail}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             keyboardType="email-address"
             autoCapitalize="none"
           />
@@ -36,7 +56,8 @@ const SignIn = () => {
             type="password"
             className={styles.input}
             placeholder="Password"
-            onChange={setPassword}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             secureTextEntry
           />
         </div>
@@ -49,7 +70,9 @@ const SignIn = () => {
           width={180}
           height={32}
         />
-        <div className={styles.forgot} onClick={handleForgotPassword}>Forgot Password?</div>
+        <div className={styles.forgot} onClick={handleForgotPassword}>
+          Forgot Password?
+        </div>
       </div>
     </div>
   );
