@@ -1,81 +1,163 @@
 // import React from 'react'
-import React, { useState } from 'react';
-import Header from '../../components/Header/Header'
-import styles from './Plot.module.css'
-import { useNavigate } from 'react-router-dom';
-
+import React, { useContext, useEffect, useState } from "react";
+import Header from "../../components/Header/Header";
+import styles from "./Plot.module.css";
+import { useNavigate } from "react-router-dom";
+import { auth, db } from "../../firebase/firebase";
+import { getDocs, collection, addDoc } from "firebase/firestore";
+import { AuthContext } from "../../firebase/AuthContext";
+import Home from "../Home/Home";
 
 const Plot = () => {
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>;
+
+  const [currentUser,setCurrentUser] = useState();
+  // console.log(currentUser)
+  const [plotList, setPlotList] = useState([]);
+
+  // New Plot
+  const [newPlotName, setNewPlotName] = useState("");
+  const [newPlotDetail, setNewPlotDetail] = useState("");
+  const [newPlotCharacter, setNewPlotCharacter] = useState("");
+  const [newPlotTimeline, setNewPlotTimeline] = useState("");
+
+  const plotCollectionRef = collection(db, "plots");
+  const userCollection = collection(db, "users");
+
+  useEffect(() => {
+    const getPlotList = async () => {
+      //READ THE DATA
+      // SET THE PLOT LIST
+      try {
+        const data = await getDocs(plotCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setPlotList(filteredData);
+        console.log({filteredData});
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getPlotList();
+  }, []);
+
+  useEffect(() => {
+    const getUser = async () => {
+      //READ THE DATA
+      // SET THE PLOT LIST
+      try {
+
+        console.log('maiwai', auth.currentUser.uid)
+        const user = await getDocs(userCollection);
+        const userData = user.docs.map((doc) => ({
+          ...doc.data(),
+          // id: doc.id,
+        }));
+        userData.map((data) => {
+          console.log('data', data.uid)
+          if (auth.currentUser.uid == data.uid) {
+            setCurrentUser(data.username)
+          }
+        })
+        console.log("userData",{userData});
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getUser();
+  }, []);
+  
+
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    title: "",
-    plot: "",
-    characters: "",
-    timeframe: "",
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    navigate('/home', {state: {formData}});
+  const handleSubmit = async () => {
+    try {
+        await addDoc(plotCollectionRef, {
+          name: newPlotName,
+          plot: newPlotDetail,
+          character: newPlotCharacter,
+          timeline: newPlotTimeline,
+          like: 0,
+          plotOwner: currentUser,
+        });
+        <Home plots = {plotCollectionRef}/>
+        // console.log(newPlotName)
+    navigate('/home')
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <div className={styles.container}>
-      <Header title={"Your Plot"}  />
-      <form class={styles.form_container} onSubmit={handleSubmit}>
-        <label class={styles.title} htmlFor="title">Name</label>
-        <label class={styles.describe}>ชื่อที่เข้าใจง่าย หรือสื่อถึงเนื้อหาของพล็อต</label>
+      <Header title={"Your Plot"} />
+      <div class={styles.form_container}>
+        <label class={styles.title} htmlFor="title">
+          Name
+        </label>
+        <label class={styles.describe}>
+          ชื่อที่เข้าใจง่าย หรือสื่อถึงเนื้อหาของพล็อต
+        </label>
         <textarea
           id="title"
           name="title"
-          value={formData.title}
-          onChange={handleChange}
+          value={newPlotName}
+          onChange={(e) => setNewPlotName(e.target.value)}
           rows={8}
-          maxlength="200"
+          maxLength="200"
         />
         <br />
-        <label class={styles.title} htmlFor="plot">The Plot</label>
-        <label class={styles.describe}>จุดเริ่มต้น หรือปมต่างๆของเรื่อง เกิดอะไรขึ้น ที่ไหน อะไร อย่างไร</label>
+        <label class={styles.title} htmlFor="plot">
+          The Plot
+        </label>
+        <label class={styles.describe}>
+          จุดเริ่มต้น หรือปมต่างๆของเรื่อง เกิดอะไรขึ้น ที่ไหน อะไร อย่างไร
+        </label>
         <textarea
           id="plot"
           name="plot"
-          value={formData.plot}
-          onChange={handleChange}
+          value={newPlotDetail}
+          onChange={(e) => setNewPlotDetail(e.target.value)}
           rows={13}
-          maxlength="1820"
+          maxLength="1820"
         />
         <br />
-        <label class={styles.title} htmlFor="characters">Character</label>
+        <label class={styles.title} htmlFor="characters">
+          Character
+        </label>
         <label class={styles.describe}>ชื่อ อายุ ลักษณะนิสัยของตัวละคร</label>
         <textarea
           id="characters"
           name="characters"
-          value={formData.characters}
-          onChange={handleChange}
+          value={newPlotCharacter}
+          onChange={(e) => setNewPlotCharacter(e.target.value)}
           rows={13}
-          maxlength="1820"
+          maxLength="1820"
         />
         <br />
-        <label class={styles.title} htmlFor="timeframe">Timeline</label>
-        <label class={styles.describe}>ช่วงเวลาที่เกิดเหตุการณ์แต่ละเหตุการณ์ หรือปีที่เกิดเหตุการณ์ต่างๆ</label>
+        <label class={styles.title} htmlFor="timeframe">
+          Timeline
+        </label>
+        <label class={styles.describe}>
+          ช่วงเวลาที่เกิดเหตุการณ์แต่ละเหตุการณ์ หรือปีที่เกิดเหตุการณ์ต่างๆ
+        </label>
         <textarea
           id="timeframe"
           name="timeframe"
-          value={formData.timeframe}
-          onChange={handleChange}
+          value={newPlotTimeline}
+          onChange={(e) => setNewPlotTimeline(e.target.value)}
           rows={13}
-          maxlength="1820"
+          maxLength="1820"
         />
         <br />
-        <div className={styles.buttonContainer}><button type="submit">Post</button></div>
-      </form>
+        <div className={styles.buttonContainer}>
+          <button type="submit" onClick={handleSubmit}>Post</button>
+        </div>
+      </div>
     </div>
   );
 };

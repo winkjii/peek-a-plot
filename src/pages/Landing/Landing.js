@@ -1,6 +1,9 @@
 import logo from "../../assets/logo.png";
 import tel from "../../assets/telephone.png";
 import x from "../../assets/x.jpg";
+import howTo1 from "../../assets/howTo-1.png";
+import howTo2 from "../../assets/howTo-2.jpg";
+import howTo3 from "../../assets/howTo-3.png";
 import email from "../../assets/email.png";
 import styles from "./Landing.module.css";
 import ButtonSemantic from "../../components/ButtonSemantic/ButtonSemantic";
@@ -14,14 +17,14 @@ export default function Landing() {
   const scrollToComponent = (elementRef) => {
     window.scrollTo({
       top: elementRef.current?.offsetTop,
-      behavior: "smooth"
-    })
-  }
+      behavior: "smooth",
+    });
+  };
   const contactData = [
     {
       logo: tel,
       title: "Call Center",
-      description: "088-888-8888",
+      description: "084-478-7690",
     },
     {
       logo: x,
@@ -34,13 +37,41 @@ export default function Landing() {
       description: "peekaplot@gmail.com",
     },
   ];
+
+  const howToUse = [
+    {
+      title:
+        "1. เมื่อผู้ใช้เข้าสู่หน้าเว็บให้ทำการ Sign-in / Log-in เพื่อทำการเข้าสู่ระบบ ",
+      pic: howTo1,
+    },
+    {
+      title:
+        "2. เมื่อลงทะเบียนเข้าสู่ระบบเรียบร้อยแล้วให้ทำการคลิ๊กไปที่ปุ่มพล็อต",
+      pic: howTo2,
+    },
+    {
+      title:
+        "3. เมื่อเข้าสู่หน้าของการเขียนพล็อตแล้วจะสามารถทำการเขียนและโพสพล็อตได้",
+      pic: howTo3,
+    },
+  ];
   return (
     <div>
       <div className={styles.navbar}>
         <div className={styles.appName}>Peek-A-Plot</div>
         <div className={styles.navbarRight}>
-          <div className={styles.navbarTxt} onClick={() => scrollToComponent(contact)}>Contact us</div>
-          <div className={styles.navbarTxt} onClick={() => scrollToComponent(howto)}>User guide</div>
+          <div
+            className={styles.navbarTxt}
+            onClick={() => scrollToComponent(contact)}
+          >
+            Contact us
+          </div>
+          <div
+            className={styles.navbarTxt}
+            onClick={() => scrollToComponent(howto)}
+          >
+            User guide
+          </div>
           <Link
             to="/sign-in"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -80,71 +111,36 @@ export default function Landing() {
       <div className={styles.description}>
         <text className={styles.title}>Peek-A-Plot คืออะไร</text>
         <text className={styles.contentDescription}>
-          {"\t"}Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-          vestibulum, metus at consectetur elementum, leo neque cursus metus,
-          vitae mollis enim leo accumsan elit. Pellentesque a urna vel odio
-          pellentesque bibendum. Class aptent taciti sociosqu ad litora torquent
-          per conubia nostra, per inceptos himenaeos. Ut fermentum malesuada
-          justo in fringilla.
+          {"\t"}Peek-A-Plot เป็นเว็บแอปพลิเคชันสำหรับเขียนพล็อต เพื่อนำเสนอ,
+          แบ่งปันเนื้อหา และแลกเปลี่ยนความคิดต่างๆ ได้อย่างสะดวกสบาย
+          และป้องกันการละเมิดลิขสิทธิ์และปัญหาที่อาจเกิดขึ้น
+          เนื่องจากปัจจุบันผู้คนหันมาสนใจงานเขียนและการอ่านหนังสือมากขึ้นเพราะไม่เพียงเสริมสร้างทักษะทางภาษาแต่ยังส่งเสริมคิดเชิงสร้างสรรค์
+          และเนื่องจากการเขียนและการแสดงผลงานที่กระจัดกระจายอาจเกิดปัญหาบางอย่าง
+          เช่น การหยิบยืมไอเดียหรือเนื้อหาจากผลงานของผู้อื่นโดยไม่ได้รับอนุญาต
+          ซึ่งอาจก่อให้เกิดความขัดแย้งเพื่อแก้ไขปัญหาดังกล่าว
+          จึงได้จัดทำเว็บนี้ขึ้นมา
         </text>
       </div>
       <div className={styles.howto}>
-        <div className={styles.title} ref={howto}>วิธีการใช้งาน</div>
-        <text className={styles.content}>
-          1. เมื่อลงทะเบียนเข้าสู่ระบบเรียบร้อยแล้วให้ทำการคลิ๊กไปที่ปุ่มพล็อต
-        </text>
-        <img
-          src={logo}
-          alt=""
-          width={300}
-          height={300}
-          style={{ objectFit: "contain" }}
-        />
-        {/* // -------------------------------------// */}
-        <text className={styles.content}>
-          1. เมื่อลงทะเบียนเข้าสู่ระบบเรียบร้อยแล้วให้ทำการคลิ๊กไปที่ปุ่มพล็อต
-        </text>
-        <img
-          src={logo}
-          alt=""
-          width={300}
-          height={300}
-          style={{ objectFit: "contain" }}
-        />
-        <text className={styles.content}>
-          1. เมื่อลงทะเบียนเข้าสู่ระบบเรียบร้อยแล้วให้ทำการคลิ๊กไปที่ปุ่มพล็อต
-        </text>
-        <img
-          src={logo}
-          alt=""
-          width={300}
-          height={300}
-          style={{ objectFit: "contain" }}
-        />
-        <text className={styles.content}>
-          1. เมื่อลงทะเบียนเข้าสู่ระบบเรียบร้อยแล้วให้ทำการคลิ๊กไปที่ปุ่มพล็อต
-        </text>
-        <img
-          src={logo}
-          alt=""
-          width={300}
-          height={300}
-          style={{ objectFit: "contain" }}
-        />
-        <text className={styles.content}>
-          1. เมื่อลงทะเบียนเข้าสู่ระบบเรียบร้อยแล้วให้ทำการคลิ๊กไปที่ปุ่มพล็อต
-        </text>
-        <img
-          src={logo}
-          alt=""
-          width={300}
-          height={300}
-          style={{ objectFit: "contain" }}
-        />
-        {/* // ---------------------------// */}
+        <div className={styles.title} ref={howto}>
+          วิธีการใช้งาน
+        </div>
+        {howToUse.map((data, i) => (
+          <div key={i} className={styles.eachHowTo}>
+            <text className={styles.content}>{data.title}</text>
+            <img
+              src={data.pic}
+              alt=""
+              width={500}
+              style={{ objectFit: "contain", marginBottom: 60}}
+            />
+          </div>
+        ))}
       </div>
       <div className={styles.contact}>
-        <text className={styles.title} ref={contact}>ติดต่อเรา</text>
+        <text className={styles.title} ref={contact}>
+          ติดต่อเรา
+        </text>
         <text className={styles.content}>
           ติดต่อสอบถามข้อมูลต่างๆได้ตามช่องทางดังนี้
         </text>

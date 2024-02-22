@@ -103,3 +103,17 @@
     font-weight: 900;
     margin-left: 6px;
   }
+
+  /* .container {
+    display: flex;
+    flex-direction: row;
+    background-color: aqua;
+    justify-content: end;
+  } */
+
+  .pageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin-left: 250px;
+  }
