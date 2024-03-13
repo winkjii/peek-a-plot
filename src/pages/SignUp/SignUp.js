@@ -1,44 +1,80 @@
 import React, { useState } from "react";
 import styles from "./SignUp.module.css";
 import ButtonSemantic from "../../components/ButtonSemantic/ButtonSemantic";
-import { auth, db } from "../../firebase/firebase";
+import { auth, db, storage } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
+import img from "../../assets/logo.png"
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        updateProfile(auth.currentUser.uid, {
-          username,
-        });
+  const handleSignUp = async () => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const storageRef = ref(storage, "usersImages/"+username);
 
-        setDoc(doc(db, "users", auth.currentUser.uid), {
-          uid: auth.currentUser.uid,
-          username,
-          // email,
-        });
+      const uploadTask = uploadBytesResumable(storageRef, img);
 
-        navigate("/sign-in");
-        console.log(userCredential);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // Implement your sign-up logic here
+      uploadTask.on(
+        (error) => {
+          setError(true)
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
+            await updateProfile(res.user, {
+              username,
+              photoURL: downloadURL,
+            });
+
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              username,
+              email,
+              photoURL: downloadURL,
+            });
+
+            setDoc(doc(db,"usersPosts",res.user.uid), {messages: []});
+          });
+        }
+      );
+      navigate("/sign-in");
+      console.log(res.user)
+    } catch (error) {
+      setError(true);
+    }
+    // const res = await createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     console.log(userCredential);
+    //     updateProfile(auth.currentUser.uid, {
+    //       username,
+    //     });
+
+    //     setDoc(doc(db, "users", auth.currentUser.uid), {
+    //       uid: auth.currentUser.uid,
+    //       username,
+    //       // email,
+    //     });
+
+    //     navigate("/sign-in");
+    //     console.log(userCredential);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // // Implement your sign-up logic here
   };
 
   const handleSignIn = () => {
-    navigate('/sign-in')
+    navigate("/sign-in");
     // console.log("Navigating to sign in screen...");
     // Implement navigation logic to the sign in screen
   };
@@ -75,6 +111,7 @@ const SignUp = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            minLength={6}
             secureTextEntry
           />
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./SignIn.module.css";
 import ButtonSemantic from "../../components/ButtonSemantic/ButtonSemantic";
-import { auth } from "../../firebase/firebase"
+import { auth } from "../../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
@@ -9,24 +9,17 @@ import { onAuthStateChanged } from "firebase/auth";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          navigate('/home');
-        }
-      })
-      console.log(userCredential)
-    }).catch((error) => {
-      console.log(error);
-    })
-    // console.log("Signing in with:", email, password);
-    // Implement your sign-in logic here
+  const handleSignIn = async (e) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/home");
+    } catch (error) {
+      setError(true);
+    }
   };
 
   const handleForgotPassword = () => {
