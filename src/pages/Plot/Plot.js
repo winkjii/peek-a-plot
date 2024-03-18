@@ -4,93 +4,153 @@ import Header from "../../components/Header/Header";
 import styles from "./Plot.module.css";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase/firebase";
-import { getDocs, collection, addDoc } from "firebase/firestore";
+import { getDocs, collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { AuthContext } from "../../firebase/AuthContext";
 import Home from "../Home/Home";
+
 
 const Plot = () => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>;
 
-  const [currentUser,setCurrentUser] = useState();
+  // const [currentUser,setCurrentUser] = useState();
   // console.log(currentUser)
   const [plotList, setPlotList] = useState([]);
+
+  const navigate = useNavigate();
+  const plotCollectionRef = collection(db, "plots");
+  const userCollectionRef = collection(db, "users");
+  const { currentUser } = useContext(AuthContext);
 
   // New Plot
   const [newPlotName, setNewPlotName] = useState("");
   const [newPlotDetail, setNewPlotDetail] = useState("");
   const [newPlotCharacter, setNewPlotCharacter] = useState("");
   const [newPlotTimeline, setNewPlotTimeline] = useState("");
+  const [currentUserUsername, setCurrentUserUsername] = useState("");
 
-  const plotCollectionRef = collection(db, "plots");
-  const userCollection = collection(db, "users");
 
+  // useEffect(() => {
+  //   const getPlotList = async () => {
+  //     //READ THE DATA
+  //     // SET THE PLOT LIST
+  //     try {
+  //       const data = await getDocs(plotCollectionRef);
+  //       const filteredData = data.docs.map((doc) => ({
+  //         ...doc.data(),
+  //         id: doc.id,
+  //       }));
+  //       setPlotList(filteredData);
+  //       console.log({filteredData});
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+
+  //   getPlotList();
+  // }, []);
+
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     //READ THE DATA
+  //     // SET THE PLOT LIST
+  //     try {
+
+  //       console.log('maiwai', auth.currentUser.uid)
+  //       const user = await getDocs(userCollection);
+  //       const userData = user.docs.map((doc) => ({
+  //         ...doc.data(),
+  //         // id: doc.id,
+  //       }));
+  //       userData.map((data) => {
+  //         console.log('data', data.uid)
+  //         if (auth.currentUser.uid == data.uid) {
+  //           setCurrentUser(data.username)
+  //         }
+  //       })
+  //       console.log("userData",{userData});
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+
+  //   getUser();
+  // }, []);
+  
   useEffect(() => {
-    const getPlotList = async () => {
-      //READ THE DATA
-      // SET THE PLOT LIST
+    const fetchUsername = async () => {
       try {
-        const data = await getDocs(plotCollectionRef);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setPlotList(filteredData);
-        console.log({filteredData});
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    getPlotList();
-  }, []);
-
-  useEffect(() => {
-    const getUser = async () => {
-      //READ THE DATA
-      // SET THE PLOT LIST
-      try {
-
-        console.log('maiwai', auth.currentUser.uid)
-        const user = await getDocs(userCollection);
-        const userData = user.docs.map((doc) => ({
-          ...doc.data(),
-          // id: doc.id,
-        }));
-        userData.map((data) => {
-          console.log('data', data.uid)
-          if (auth.currentUser.uid == data.uid) {
-            setCurrentUser(data.username)
+        const querySnapshot = await getDocs(userCollectionRef);
+        querySnapshot.forEach((doc) => {
+          if (doc.id === currentUser.uid) {
+            setCurrentUserUsername(doc.data().username);
           }
-        })
-        console.log("userData",{userData});
-      } catch (err) {
-        console.error(err);
+        });
+      } catch (error) {
+        console.error("Error fetching username:", error);
       }
     };
 
-    getUser();
-  }, []);
+    fetchUsername();
+  }, [currentUser, userCollectionRef]);
   
 
-  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSubmit = async () => {
     try {
-        await addDoc(plotCollectionRef, {
-          name: newPlotName,
-          plot: newPlotDetail,
-          character: newPlotCharacter,
-          timeline: newPlotTimeline,
-          like: 0,
-          plotOwner: currentUser,
-        });
-        <Home plots = {plotCollectionRef}/>
-        // console.log(newPlotName)
-    navigate('/home')
+      await addDoc(plotCollectionRef, {
+        name: newPlotName,
+        plot: newPlotDetail,
+        character: newPlotCharacter,
+        timeline: newPlotTimeline,
+        like: 0,
+        plotOwner: currentUserUsername, // ใช้ currentUser.uid เป็นเจ้าของพล็อต
+        timestamp: new Date(),
+      });
+      navigate("/home");
+      <Home plot = {plotCollectionRef}/>
     } catch (err) {
       console.error(err);
     }
   };
+
+  // const handleSubmit = async () => {
+  //   try {
+  //       await addDoc(plotCollectionRef, {
+  //         name: newPlotName,
+  //         plot: newPlotDetail,
+  //         character: newPlotCharacter,
+  //         timeline: newPlotTimeline,
+  //         like: 0,
+  //         plotOwner: currentUser.uid,
+  //       });
+  //       // <Home plots = {plotCollectionRef}/>
+  //       navigate('/home');
+  //       // console.log(newPlotName)
+  //   // navigate('/home')
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+  // const handleSubmit = async () => {
+  //   try {
+  //       await addDoc(collection(db, "plotCollectionRef"), {
+  //         name: newPlotName,
+  //         plot: newPlotDetail,
+  //         character: newPlotCharacter,
+  //         timeline: newPlotTimeline,
+  //         like: 0,
+  //         plotOwner: currentUser.uid,
+  //       });
+
+  //       <Home plots = {plotCollectionRef}/>
+  //       // console.log(newPlotName)
+  //   navigate('/home')
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <div className={styles.container}>

@@ -20,6 +20,7 @@ const SignUp = () => {
   const handleSignUp = async () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
+
       const storageRef = ref(storage, "usersImages/"+username);
 
       const uploadTask = uploadBytesResumable(storageRef, img);
@@ -32,14 +33,14 @@ const SignUp = () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
             await updateProfile(res.user, {
               username,
-              photoURL: downloadURL,
+              photoURL: downloadURL, // นำ downloadURL จากการอัปโหลดรูปภาพเข้ามาด้วย
             });
 
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               username,
               email,
-              photoURL: downloadURL,
+              photoURL: downloadURL, // นำ downloadURL จากการอัปโหลดรูปภาพเข้ามาด้วย
             });
 
             setDoc(doc(db,"usersPosts",res.user.uid), {messages: []});
