@@ -15,6 +15,10 @@ export default function Sidebar({ children }) {
       title: "Home",
       path: "/home",
     },
+    {
+      title: "Profile",
+      path: "/profile",
+    },
   ];
 
   // console.log("login", auth?.currentUser?.email);
@@ -52,6 +56,7 @@ export default function Sidebar({ children }) {
             title={"Plot"}
             path={"/plot"}
             theme={"white"}
+            color={"black"}
             width={130}
             fontSize={17}
           />

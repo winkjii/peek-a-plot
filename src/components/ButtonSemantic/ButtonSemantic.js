@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import "./ButtonSemantic.css";
+import styles from "./ButtonSemantic.module.css";
 
 const ButtonSemantic = ({
   title,
   onClick,
   path,
   theme,
+  color,
   width,
   height,
   margin,
@@ -19,7 +20,7 @@ const ButtonSemantic = ({
       style={{ textDecoration: "none", color: "inherit" }}
     >
       <div
-        className={`buttonSemantic ${theme}`}
+        className={styles.buttonSemantic}
         style={{
           width: width ? width : 110,
           height: height ? height : 40,
@@ -27,6 +28,8 @@ const ButtonSemantic = ({
           borderRadius: radius,
           fontWeight: fontWeight,
           fontSize: fontSize,
+          backgroundColor: theme ? theme : "black",
+          color: color ? color : "white",
         }}
         onClick={onClick}
       >

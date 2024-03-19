@@ -10,11 +10,14 @@ import {
 import { setDoc } from "firebase/firestore";
 import { AuthContext } from "../../firebase/AuthContext";
 import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../Toggle/ContextProvider";
 
 
 const ShowPlot = ({ plot }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState([]);
+
+  const { isDark } = useContext(ThemeContext);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -42,7 +45,7 @@ const ShowPlot = ({ plot }) => {
   }, [likes, currentUser.uid]);
 
   return (
-    <div>
+    <div className={styles.container} data-theme={isDark? "dark": "light"}>
           <div key={plot.id} className={styles.plotSummary}>
             <div className={styles.profile}>
               <img src={logo} alt="" className={styles.logo} />

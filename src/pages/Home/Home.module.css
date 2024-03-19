@@ -117,3 +117,8 @@
     justify-content: end;
     margin-left: 250px;
   }
+
+  .container {
+    background-color: var(--body_background);
+    height: 100vh;
+  }

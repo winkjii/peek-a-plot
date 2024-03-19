@@ -32,13 +32,13 @@ const SignUp = () => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
             await updateProfile(res.user, {
-              username,
+              displayName: username,
               photoURL: downloadURL, // นำ downloadURL จากการอัปโหลดรูปภาพเข้ามาด้วย
             });
 
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
-              username,
+              displayName: username,
               email,
               photoURL: downloadURL, // นำ downloadURL จากการอัปโหลดรูปภาพเข้ามาด้วย
             });
@@ -48,7 +48,7 @@ const SignUp = () => {
         }
       );
       navigate("/sign-in");
-      console.log(res.user)
+      // console.log(res.user)
     } catch (error) {
       setError(true);
     }
