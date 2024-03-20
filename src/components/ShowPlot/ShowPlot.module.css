@@ -5,7 +5,7 @@
 
 .plotSummary {
     max-width: 1600px;
-    border: 2px solid black;
+    border: 2px solid var(--border_color);
     border-radius: 20px;
     margin: 10px;
     padding: 10px;
@@ -22,27 +22,30 @@
     width: 30px;
     height: 30px;
     padding:5px;
-    border: 2px solid black;
+    border: 2px solid var(--border_color);
     border-radius: 50px;
     margin-left: 40px;
     
 }
 
 .username {
-    margin-left: 10px;  
+    margin-left: 10px; 
+    color: var(--color);
 }
 
 .detail_plot {
     margin-left: 80px;
+    color: var(--color);
 }
 
 /* like button styles */
 
 .like_button .heart_icon {
-    height: 100px;
-    width: 100px;
-    background: url("../../assets/heart.png");
+    height: 70px;
+    width: 70px;
+    background: url("../../assets/heart.png") no-repeat;
     background-position: left;
+    background-size: 2900%;
     cursor: pointer;
     position: absolute;
     
@@ -61,8 +64,8 @@
   .like_button .heart_bg {
     background: rgba(255, 192, 200, 0);
     border-radius: 50%;
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,7 +79,7 @@
   .like_button {
     display: flex;
     align-items: center;
-    margin-left: 60px;
+    /* margin-left: 60px; */
   }
   
   .like_button .likes_amount {

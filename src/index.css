@@ -1,12 +1,14 @@
 :root {
-  --body_background: white;
-  --body_color: black;
+  --background: white;
+  --color: black;
+  --border_color: black;
   --link_color: navy;
 }
 
 [data-theme="dark"] {
-  --body_background: black;
-  --body_color: white;
+  --background: black;
+  --color: white;
+  --border_color: #262626;
   --link_color: cyan;
 }
 

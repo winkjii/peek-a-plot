@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./ButtonOutline.module.css";
+import { useContext } from "react";
+import { ThemeContext } from "../Toggle/ContextProvider";
 
 const ButtonOutline = ({
   title,
@@ -13,6 +15,9 @@ const ButtonOutline = ({
   fontWeight,
   fontSize,
 }) => {
+
+  const { isDark } = useContext(ThemeContext);
+
   return (
       <div
         className={styles.buttonOutline}
@@ -23,7 +28,9 @@ const ButtonOutline = ({
           borderRadius: radius,
           fontWeight: fontWeight,
           fontSize: fontSize,
+          // border
         }}
+        data-theme={isDark ? "dark" : "light"}
         onClick={onClick}
       >
         {title}

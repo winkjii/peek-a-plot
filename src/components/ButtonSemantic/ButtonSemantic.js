@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./ButtonSemantic.module.css";
+import { useContext } from "react";
+import { ThemeContext } from "../Toggle/ContextProvider";
 
 const ButtonSemantic = ({
   title,
@@ -14,6 +16,8 @@ const ButtonSemantic = ({
   fontWeight,
   fontSize,
 }) => {
+  const { isDark } = useContext(ThemeContext);
+
   return (
     <Link
       to={path ? path : null}
@@ -21,6 +25,7 @@ const ButtonSemantic = ({
     >
       <div
         className={styles.buttonSemantic}
+        data-theme={isDark ? "dark" : "light"}
         style={{
           width: width ? width : 110,
           height: height ? height : 40,

@@ -7,7 +7,12 @@ import img from "../../assets/logo.png";
 import { Toggle } from "../../components/Toggle/Toggle";
 import { ThemeContext } from "../../components/Toggle/ContextProvider";
 import { AuthContext } from "../../firebase/AuthContext";
-import { EmailAuthProvider, reauthenticateWithCredential, updateEmail, updateProfile } from "firebase/auth";
+import {
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updateEmail,
+  updateProfile,
+} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import ButtonSemantic from "../../components/ButtonSemantic/ButtonSemantic";
@@ -15,17 +20,17 @@ import ButtonOutline from "../../components/ButtonOutline/ButtonOutline";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const {currentUser} = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const { isDark } = useContext(ThemeContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
     username: currentUser.displayName,
     email: currentUser.email,
-  })
+  });
 
-  const handleChange=(e)=> {
+  const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -34,13 +39,13 @@ const Profile = () => {
 
     await updateProfile(currentUser, {
       displayName: data.username,
-      email: data.email
+      email: data.email,
     });
 
     await setDoc(doc(db, "users", currentUser.uid), {
       uid: currentUser.uid,
       displayName: data.username,
-      email: data.email
+      email: data.email,
     });
 
     // const credential = EmailAuthProvider.credential(
@@ -52,8 +57,8 @@ const Profile = () => {
     //     await updateEmail(currentUser, data.email);
     //   }
     // )
-    navigate("/home")
-  }
+    navigate("/home");
+  };
   console.log(data);
 
   return (
@@ -88,10 +93,29 @@ const Profile = () => {
           </div>
           <div className={styles.inputContainer}>
             <text>Dark mode</text>
-            <Toggle show={true}/>
+            <Toggle show={true} />
           </div>
         </div>
-        <div className={styles.button}><ButtonOutline onClick={() => navigate("/home")} title={"Cancle"} width={"160px"} margin={"0px 20px"}/><ButtonSemantic onClick={handleUpdate} title={"Save"} width={"160px"}/></div>
+        <div className={styles.button}>
+          <ButtonOutline
+            onClick={() => navigate("/home")}
+            title={"Cancle"}
+            width={"160px"}
+            margin={"0px 20px"}
+          />
+          {isDark ? <ButtonSemantic
+            onClick={handleUpdate}
+            title={"Save"}
+            width={"160px"}
+            theme={"white"}
+            color={"black"}
+          /> :
+          <ButtonSemantic
+            onClick={handleUpdate}
+            title={"Save"}
+            width={"160px"}
+          />}
+        </div>
       </div>
     </div>
   );

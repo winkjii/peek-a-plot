@@ -29,7 +29,7 @@ const Plot = () => {
         const querySnapshot = await getDocs(userCollectionRef);
         querySnapshot.forEach((doc) => {
           if (doc.id === currentUser.uid) {
-            setCurrentUserUsername(doc.data().username);
+            setCurrentUserUsername(doc.data().displayName);
           }
         });
       } catch (error) {

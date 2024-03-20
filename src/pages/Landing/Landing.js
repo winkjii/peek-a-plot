@@ -96,6 +96,7 @@ export default function Landing() {
             title={"Start Writing"}
             path={"/sign-up"}
             theme={"white"}
+            color={"black"}
             width={210}
             height={37}
           />

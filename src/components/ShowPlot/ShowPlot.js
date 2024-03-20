@@ -67,6 +67,7 @@ const ShowPlot = ({ plot }) => {
                 <b>Timeline:</b> {plot.data.timeline}
               </p>
 
+              {/* <div style={{width: }}> */}
               <div className={styles.like_button} onClick={() => likePost()}>
                 <div className={styles.heart_bg}>
                   <div
@@ -77,6 +78,7 @@ const ShowPlot = ({ plot }) => {
                 </div>
                 <span className={styles.likes_amount}>{likes.length}</span>
               </div>
+              {/* </div> */}
             </div>
           </div>
     </div>

@@ -17,6 +17,7 @@ import App from "./App";
 import ThemeContextProvider from "./components/Toggle/ContextProvider";
 
 import { AuthContextProvider } from "./firebase/AuthContext";
+import TrendingList from "./pages/Trend/Trend";
 
 const router = createBrowserRouter([
   {
@@ -49,8 +50,8 @@ const router = createBrowserRouter([
     element: <Plot />,
   },
   {
-    path: "/app",
-    element: <App />,
+    path: "/trend",
+    element: <TrendingList />,
   },
 ]);
 

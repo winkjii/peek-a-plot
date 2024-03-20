@@ -6,15 +6,22 @@ import ButtonSemantic from "../../components/ButtonSemantic/ButtonSemantic";
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
 
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../Toggle/ContextProvider";
 
 export default function Sidebar({ children }) {
+  const { isDark } = useContext(ThemeContext);
+
   const navigate = useNavigate();
   const menuItem = [
     {
       title: "Home",
       path: "/home",
     },
+    // {
+    //   title: "Trend",
+    //   path: "/trend",
+    // },
     {
       title: "Profile",
       path: "/profile",
@@ -33,7 +40,7 @@ export default function Sidebar({ children }) {
   };
 
   return (
-    <div className={styles.container_1}>
+    <div className={styles.container_1} data-theme={isDark ? "dark" : "light"}>
       <div className={styles.sidebar}>
         <img
           src={logo}
