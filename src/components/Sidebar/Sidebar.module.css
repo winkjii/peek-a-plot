@@ -6,7 +6,8 @@
 
 .sidebar {
   background-color: black;
-  /*height: 100vh;*/
+  border-right: 1px solid var(--border_color);
+  /* height: 100vh; */
   width: 250px;
 }
 
@@ -15,7 +16,7 @@
   margin-top: 20px;
   margin-left: 20px;
   font-size: 25px;
-  height: 70%;
+  height: 60%;
 }
 
 .link {

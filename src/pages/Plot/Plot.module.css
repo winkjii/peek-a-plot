@@ -1,5 +1,6 @@
 .container {
     max-width: 100%;
+    background-color: var(--background);
   }
 
 .form_container {
@@ -22,6 +23,7 @@ textarea {
     font-weight: 500;
     margin-left: 20px;
     margin-bottom: 10px;
+    color: var(--color);
 }
 
 .describe {
@@ -30,7 +32,7 @@ textarea {
     font-weight: 300;
     margin-left: 20px;
     margin-bottom: 15px;
-
+    color: var(--color);
 }
 
 .buttonContainer {
@@ -38,9 +40,10 @@ textarea {
     justify-content: center;
 }
 button[type="submit"] {
-    background-color: black;
+    background-color: var(--color);
+    border-width: 0px;
     border-radius: 40px;
-    color: white;
+    color: var(--background);
     font-size: 25px;
     font-weight: bold;
     padding: 11px 55px;

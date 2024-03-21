@@ -6,10 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase/firebase";
 import { getDocs, collection, addDoc } from "firebase/firestore";
 import { AuthContext } from "../../firebase/AuthContext";
+import { ThemeContext } from "../../components/Toggle/ContextProvider";
+import { Toggle } from "../../components/Toggle/Toggle";
 
 
 const Plot = () => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>;
+  const { isDark } = useContext(ThemeContext);
 
   const navigate = useNavigate();
   const plotCollectionRef = collection(db, "plots");
@@ -29,7 +32,7 @@ const Plot = () => {
         const querySnapshot = await getDocs(userCollectionRef);
         querySnapshot.forEach((doc) => {
           if (doc.id === currentUser.uid) {
-            setCurrentUserUsername(doc.data().username);
+            setCurrentUserUsername(doc.data().displayName);
           }
         });
       } catch (error) {
@@ -61,7 +64,8 @@ const Plot = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-theme={isDark ? "dark" : "light"}>
+    <Toggle />
       <Header title={"Your Plot"} />
       <div class={styles.form_container}>
         <label class={styles.title} htmlFor="title">

@@ -20,35 +20,35 @@ const SignUp = () => {
   const handleSignUp = async () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
+      // const storageRef = ref(storage, "usersImages/"+username);
 
-      const storageRef = ref(storage, "usersImages/"+username);
+      // const uploadTask = uploadBytesResumable(storageRef, img);
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
-
-      uploadTask.on(
-        (error) => {
-          setError(true)
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
+      // uploadTask.on(
+      //   (error) => {
+      //     setError(true)
+      //   },
+      //   () => {
+      //     getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
+      //       console.log(downloadURL)
             await updateProfile(res.user, {
-              username,
-              photoURL: downloadURL, // นำ downloadURL จากการอัปโหลดรูปภาพเข้ามาด้วย
+              displayName: username,
+              // photoURL: downloadURL,
             });
 
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
-              username,
+              displayName: username,
               email,
-              photoURL: downloadURL, // นำ downloadURL จากการอัปโหลดรูปภาพเข้ามาด้วย
+              // photoURL: downloadURL,
             });
 
             setDoc(doc(db,"usersPosts",res.user.uid), {messages: []});
-          });
-        }
-      );
+      //     });
+      //   }
+      // );
       navigate("/sign-in");
-      console.log(res.user)
+      // console.log(res.user)
     } catch (error) {
       setError(true);
     }
@@ -83,9 +83,9 @@ const SignUp = () => {
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-        <text className={styles.title}>Sign up</text>
+        <p className={styles.title}>Sign up</p>
         <div className={styles.inputContainer}>
-          <text className={styles.inputLabel}>Username</text>
+          <p className={styles.inputLabel}>Username</p>
           <input
             className={styles.input}
             placeholder="Username"
@@ -94,18 +94,18 @@ const SignUp = () => {
           />
         </div>
         <div className={styles.inputContainer}>
-          <text className={styles.inputLabel}>Email</text>
+          <p className={styles.inputLabel}>Email</p>
           <input
             className={styles.input}
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            keyboardType="email-address"
+            keyboardtype="email-address"
             autoCapitalize="none"
           />
         </div>
         <div className={styles.inputContainer}>
-          <text className={styles.inputLabel}>Password</text>
+          <p className={styles.inputLabel}>Password</p>
           <input
             type="password"
             className={styles.input}
@@ -117,7 +117,7 @@ const SignUp = () => {
           />
         </div>
         <div className={styles.inputContainer}>
-          <text className={styles.inputLabel}>Confirm Password</text>
+          <p className={styles.inputLabel}>Confirm Password</p>
           <input
             type="password"
             className={styles.input}

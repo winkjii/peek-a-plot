@@ -10,11 +10,14 @@ import {
 import { setDoc } from "firebase/firestore";
 import { AuthContext } from "../../firebase/AuthContext";
 import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../Toggle/ContextProvider";
 
 
 const ShowPlot = ({ plot }) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState([]);
+
+  const { isDark } = useContext(ThemeContext);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -42,7 +45,7 @@ const ShowPlot = ({ plot }) => {
   }, [likes, currentUser.uid]);
 
   return (
-    <div>
+    <div className={styles.container} data-theme={isDark? "dark": "light"}>
           <div key={plot.id} className={styles.plotSummary}>
             <div className={styles.profile}>
               <img src={logo} alt="" className={styles.logo} />
@@ -64,6 +67,7 @@ const ShowPlot = ({ plot }) => {
                 <b>Timeline:</b> {plot.data.timeline}
               </p>
 
+              {/* <div style={{width: }}> */}
               <div className={styles.like_button} onClick={() => likePost()}>
                 <div className={styles.heart_bg}>
                   <div
@@ -74,6 +78,7 @@ const ShowPlot = ({ plot }) => {
                 </div>
                 <span className={styles.likes_amount}>{likes.length}</span>
               </div>
+              {/* </div> */}
             </div>
           </div>
     </div>
