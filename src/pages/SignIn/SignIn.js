@@ -18,7 +18,8 @@ const SignIn = () => {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/home");
     } catch (error) {
-      setError(true);
+      console.log("error", error)
+      alert("เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบชื่อผู้ใช้และรหัสผ่านของคุณอีกครั้ง ")
     }
   };
 
@@ -63,9 +64,6 @@ const SignIn = () => {
           width={180}
           height={32}
         />
-        <div className={styles.forgot} onClick={handleForgotPassword}>
-          Forgot Password?
-        </div>
       </div>
     </div>
   );
