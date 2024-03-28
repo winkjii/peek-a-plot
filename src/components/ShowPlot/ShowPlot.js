@@ -6,6 +6,7 @@ import {
   doc,
   onSnapshot,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { setDoc } from "firebase/firestore";
 import { AuthContext } from "../../firebase/AuthContext";
@@ -24,9 +25,15 @@ const ShowPlot = ({ plot }) => {
   const likePost = async () => {
     if (liked) {
       await deleteDoc(doc(db, "plots", plot.id, "likes", currentUser.uid));
+      await updateDoc(doc(db, "plots", plot.id), {
+        like: likes.length -1,
+      });
     } else {
       await setDoc(doc(db, "plots", plot.id, "likes", currentUser.uid), {
         userId: currentUser.uid,
+      });
+      await updateDoc(doc(db, "plots", plot.id), {
+        like: likes.length +1,
       });
     }
   };
