@@ -55,6 +55,7 @@ const Plot = () => {
         timeline: newPlotTimeline,
         like: 0,
         plotOwner: currentUserUsername, // ใช้ currentUser.uid เป็นเจ้าของพล็อต
+        plotOwnerId: currentUser.uid,
         timestamp: new Date(),
       });
       navigate("/home");
