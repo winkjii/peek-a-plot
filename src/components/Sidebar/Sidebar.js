@@ -18,10 +18,10 @@ export default function Sidebar({ children }) {
       title: "Home",
       path: "/home",
     },
-    // {
-    //   title: "Trend",
-    //   path: "/trend",
-    // },
+    {
+      title: "Trend",
+      path: "/trend",
+    },
     {
       title: "Profile",
       path: "/profile",
