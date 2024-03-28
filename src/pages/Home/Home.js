@@ -51,7 +51,7 @@ const Home = () => {
         />
     <Toggle/>
 
-        {filteredData.map((p) => (
+        {filteredData.sort((a,b)=> b.data.timestamp - a.data.timestamp).map((p) => (
           <ShowPlot key={plots.id} plot={p}/>
           )
         )}
