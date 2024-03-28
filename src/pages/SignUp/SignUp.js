@@ -3,17 +3,16 @@ import styles from "./SignUp.module.css";
 import ButtonSemantic from "../../components/ButtonSemantic/ButtonSemantic";
 import { auth, db, storage } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+// import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
-import img from "../../assets/logo.png"
+// import img from "../../assets/logo.png"
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -50,7 +49,7 @@ const SignUp = () => {
       navigate("/sign-in");
       // console.log(res.user)
     } catch (error) {
-      setError(true);
+      // alert("ไม่สามารถสมัครสมาชิกได้สำเร็จ กรุณาลองอีกครั้ง")
     }
     // const res = await createUserWithEmailAndPassword(auth, email, password)
     //   .then((userCredential) => {

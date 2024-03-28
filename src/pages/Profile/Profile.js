@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Profile.module.css";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
@@ -13,7 +13,7 @@ import {
   updateEmail,
   updateProfile,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import ButtonSemantic from "../../components/ButtonSemantic/ButtonSemantic";
 import ButtonOutline from "../../components/ButtonOutline/ButtonOutline";
@@ -25,10 +25,21 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
+  const [plots, setPlots] = useState([]);
+
+
   const [data, setData] = useState({
     username: currentUser.displayName,
     email: currentUser.email,
   });
+
+  
+  useEffect(() => {
+    const unSub = onSnapshot(collection(db, "plots"), (snapshot) => {
+      setPlots(snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() })))
+    });
+    return () => unSub();
+  }, []);
 
   const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -47,6 +58,15 @@ const Profile = () => {
       displayName: data.username,
       email: data.email,
     });
+
+    plots.map(async(p) => {
+      if (p.data.plotOwnerId == currentUser.uid) {
+        await updateDoc(doc(db, "plots", p.id), {
+          plotOwner: data.username
+        })
+      }
+      console.log("plotProfile", p)
+    })
 
     // const credential = EmailAuthProvider.credential(
     //   currentUser.email,
