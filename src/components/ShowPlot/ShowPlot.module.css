@@ -150,8 +150,8 @@
   display: flex;
   width: 75%;
   background: transparent;
-  color: black;
-  border: 1px solid black;
+  color: var(--color);
+  border: 1px solid var(--color);
   padding: 10px 20px 10px 20px;
   margin: 0px 0px 20px 20px;
   outline: none;
@@ -164,8 +164,8 @@
 .commentPost {
   /* display: flex; */
   padding: 13px 10px;
-  background-color: black;
-  color: white;
+  background-color: var(--color);
+  color: var(--background);
   font-size: 20px;
   font-weight: 500;
   /* margin: 0px 20px 20px 0px; */
@@ -185,7 +185,7 @@
 .commentWrapper {
   display: flex;
   align-items: center;
-  border-top: 1px dashed black;
+  border-top: 1px dashed var(--color);
   width: 90%;
   margin: auto;
 }
@@ -210,6 +210,7 @@
 }
 
 .commentUsername {
+  color: var(--color);
   font-weight: bold;
   cursor: pointer;
   margin-right: 10px;
@@ -227,6 +228,7 @@
 }
 
 .commentText {
+  color: var(--color);
   margin-top: 3px;
 }
 
