@@ -208,12 +208,12 @@ const ShowPlot = ({ plot, plotId }) => {
               }}
             >
               {/* <div className={styles.comment_button} onClick={() => {setCommentBoxVisible(!commentBoxVisible)}}> */}
-              <img src={comment} alt="" className={styles.comment_icon} />
+              {isDark ? <img src={comment} alt="" className={styles.comment_icon_dark} /> : <img src={comment} alt="" className={styles.comment_icon} />}
               <span className={styles.comments_amount}>{comments.length}</span>
             </div>
             </div>
             <div className={styles.bookmark} onClick={() => handleBookmark()}>
-              <img src={bookmarked ? bookmarkBlack : bookmark} width={25} />
+              {isDark ? <img src={bookmarked ? bookmarkBlack : bookmark} width={25} className={styles.bookmarkDark}/> : <img src={bookmarked ? bookmarkBlack : bookmark} width={25} />}
             </div>
             {/* <div>
                   <span 
