@@ -5,15 +5,13 @@
 .App {
   width: 100vm;
   height: 100vh;
+  background-color: var(--background);
 }
 
 body {
   margin: 0;
   padding: 0;
-}
-
-* {
-  box-sizing: border-box;
+  background-color: var(--background);
 }
 
 .navbar {

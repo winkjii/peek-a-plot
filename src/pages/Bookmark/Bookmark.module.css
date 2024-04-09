@@ -1,3 +1,5 @@
 .bookmarkContainer {
     background-color: var(--background);
+    min-height: 100vh;
+    height: 100%;
 }
