@@ -1,93 +1,91 @@
 .container {
-    height: 100%;
-    /* background-color: black; */
+  height: 100%;
+  /* background-color: black; */
 }
 
 .plotSummary {
-    max-width: 1600px;
-    border: 2px solid var(--border_color);
-    border-radius: 20px;
-    margin: 10px;
-    padding: 10px;
-    overflow-y: auto;
-  }
+  max-width: 1600px;
+  border: 2px solid var(--border_color);
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px;
+  overflow-y: auto;
+}
 
-  .profile {
-    display: flex ;
-    align-items: center;
-    flex-direction:row;
-  }
-  
-  .logo {
-    width: 30px;
-    height: 30px;
-    padding:5px;
-    border: 2px solid var(--border_color);
-    border-radius: 50px;
-    margin-left: 40px;
-    
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border: 2px solid var(--border_color);
+  border-radius: 50px;
+  margin-left: 40px;
 }
 
 .username {
-    margin-left: 10px; 
-    color: var(--color);
+  margin-left: 10px;
+  color: var(--color);
 }
 
 .detail_plot {
-    margin-left: 80px;
-    color: var(--color);
+  margin-left: 80px;
+  color: var(--color);
 }
 
 /* like button styles */
 
 .like_button .heart_icon {
-    height: 70px;
-    width: 70px;
-    background: url("../../assets/heart.png") no-repeat;
-    background-position: left;
-    background-size: 2900%;
-    cursor: pointer;
-    position: absolute;
-    
+  height: 70px;
+  width: 70px;
+  background: url("../../assets/heart.png") no-repeat;
+  background-position: left;
+  background-size: 2900%;
+  cursor: pointer;
+  position: absolute;
+}
+
+.like_button .heart_icon.liked {
+  animation: like-anim 0.7s steps(28) forwards;
+}
+
+@keyframes like-anim {
+  to {
+    background-position: right;
   }
-  
-  .like_button .heart_icon.liked {
-    animation: like-anim 0.7s steps(28) forwards;
-  }
-  
-  @keyframes like-anim {
-    to {
-      background-position: right;
-    }
-  }
-  
-  .like_button .heart_bg {
-    background: rgba(255, 192, 200, 0);
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 100ms ease;
-  }
-  
-  .like_button .heart_bg:hover {
-    background: rgba(255, 192, 200, 0.7);
-  }
-  
-  .like_button {
-    display: flex;
-    align-items: center;
-    /* margin-left: 60px; */
-  }
-  
-  .like_button .likes_amount {
-    font-size: 20px;
-    color: #888;
-    font-weight: 900;
-    margin-left: 6px;
-  }
+}
+
+.like_button .heart_bg {
+  background: rgba(255, 192, 200, 0);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 100ms ease;
+}
+
+.like_button .heart_bg:hover {
+  background: rgba(255, 192, 200, 0.7);
+}
+
+.like_button {
+  display: flex;
+  align-items: center;
+  /* margin-left: 60px; */
+}
+
+.like_button .likes_amount {
+  font-size: 20px;
+  color: #888;
+  font-weight: 900;
+  margin-left: 6px;
+}
 
 /* comment button styles */
 .action_buttons {
@@ -108,7 +106,22 @@
   align-items: center;
 }
 
+.comment_icon_dark {
+  display: flex;
+  align-items: center;
+  filter: invert(70%);
+  -webkit-filter: invert(70%);
+}
+
 .comment_button .comment_icon {
+  height: 25px;
+  width: 25px;
+  /* margin-top: 10px; */
+  cursor: pointer;
+  margin-left: 60px; /* เพิ่ม margin-left เพื่อให้ comment icon อยู่ห่างจาก like icon */
+}
+
+.comment_button .comment_icon_dark {
   height: 25px;
   width: 25px;
   /* margin-top: 10px; */
@@ -124,16 +137,16 @@
   margin-top: 0px;
 }
 
-.commentBox{
+.commentBox {
   display: flex;
   align-items: center;
   margin-top: 30px;
-  margin-left:  60px;
+  margin-left: 60px;
   height: auto;
   width: 90%;
 }
 
-.commentInput{
+.commentInput {
   display: flex;
   width: 75%;
   background: transparent;
@@ -148,7 +161,7 @@
   height: auto;
 }
 
-.commentPost{
+.commentPost {
   /* display: flex; */
   padding: 13px 10px;
   background-color: black;
@@ -161,9 +174,7 @@
   cursor: pointer;
 }
 
-
-
-.comment{
+.comment {
   width: 90%;
   max-height: 250px;
   overflow-y: scroll;
@@ -171,7 +182,7 @@
   margin-top: 20px;
 }
 
-.commentWrapper{
+.commentWrapper {
   display: flex;
   align-items: center;
   border-top: 1px dashed black;
@@ -208,7 +219,7 @@
   display: flex;
   width: 30px;
   height: 30px;
-  padding:5px;
+  padding: 5px;
   border: 2px solid var(--border_color);
   border-radius: 50px;
   cursor: pointer;
@@ -225,5 +236,10 @@
 
 .bookmark {
   display: flex;
-  left: 50px
+  left: 50px;
+}
+
+.bookmarkDark {
+  filter: invert(70%);
+  -webkit-filter: invert(70%);
 }
