@@ -49,7 +49,7 @@ const SignUp = () => {
       navigate("/sign-in");
       // console.log(res.user)
     } catch (error) {
-      // alert("ไม่สามารถสมัครสมาชิกได้สำเร็จ กรุณาลองอีกครั้ง")
+      alert(error)
     }
     // const res = await createUserWithEmailAndPassword(auth, email, password)
     //   .then((userCredential) => {

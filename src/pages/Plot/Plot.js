@@ -45,6 +45,7 @@ const Plot = () => {
   
 
   const handleSubmit = async (e) => {
+    console.log("submit")
     e.preventDefault();
 
     try {
@@ -81,7 +82,7 @@ const Plot = () => {
           value={newPlotName}
           onChange={(e) => setNewPlotName(e.target.value)}
           rows={8}
-          maxLength="200"
+          maxLength="50"
         />
         <br />
         <label class={styles.title} htmlFor="plot">
@@ -96,7 +97,7 @@ const Plot = () => {
           value={newPlotDetail}
           onChange={(e) => setNewPlotDetail(e.target.value)}
           rows={13}
-          maxLength="1820"
+          maxLength="250"
         />
         <br />
         <label class={styles.title} htmlFor="characters">
@@ -109,7 +110,7 @@ const Plot = () => {
           value={newPlotCharacter}
           onChange={(e) => setNewPlotCharacter(e.target.value)}
           rows={13}
-          maxLength="1820"
+          maxLength="250"
         />
         <br />
         <label class={styles.title} htmlFor="timeframe">
@@ -124,7 +125,7 @@ const Plot = () => {
           value={newPlotTimeline}
           onChange={(e) => setNewPlotTimeline(e.target.value)}
           rows={13}
-          maxLength="1820"
+          maxLength="250"
         />
         <br />
         <div className={styles.buttonContainer}>

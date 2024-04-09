@@ -94,6 +94,13 @@
   display: flex;
   align-items: center;
   margin-left: 10px; /* ปรับเพิ่ม margin-left เพื่อช่วยให้ comment button อยู่ห่างจาก like button */
+  margin-right: 20px;
+  justify-content: space-between;
+}
+
+.like_comment {
+  display: flex;
+  flex-direction: row;
 }
 
 .comment_button {
@@ -214,4 +221,9 @@
 
 .commentInText {
   margin-left: 45px; /* ปรับตามความเหมาะสม */
+}
+
+.bookmark {
+  display: flex;
+  left: 50px
 }

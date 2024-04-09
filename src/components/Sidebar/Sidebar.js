@@ -19,6 +19,10 @@ export default function Sidebar({ children }) {
       path: "/home",
     },
     {
+      title: "Bookmarks",
+      path: "/bookmark",
+    },
+    {
       title: "Trend",
       path: "/trend",
     },

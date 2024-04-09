@@ -18,6 +18,7 @@ import ThemeContextProvider from "./components/Toggle/ContextProvider";
 
 import { AuthContextProvider } from "./firebase/AuthContext";
 import TrendingList from "./pages/Trend/Trend";
+import Bookmark from "./pages/Bookmark/Bookmark";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/trend",
     element: <TrendingList />,
+  },
+  {
+    path: "/bookmark",
+    element: <Bookmark />,
   },
 ]);
 
