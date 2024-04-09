@@ -88,3 +88,142 @@
     font-weight: 900;
     margin-left: 6px;
   }
+
+/* comment button styles */
+.action_buttons {
+  display: flex;
+  align-items: center;
+  margin-left: 10px; /* ปรับเพิ่ม margin-left เพื่อช่วยให้ comment button อยู่ห่างจาก like button */
+  margin-right: 20px;
+  justify-content: space-between;
+}
+
+.like_comment {
+  display: flex;
+  flex-direction: row;
+}
+
+.comment_button {
+  display: flex;
+  align-items: center;
+}
+
+.comment_button .comment_icon {
+  height: 25px;
+  width: 25px;
+  /* margin-top: 10px; */
+  cursor: pointer;
+  margin-left: 60px; /* เพิ่ม margin-left เพื่อให้ comment icon อยู่ห่างจาก like icon */
+}
+
+.comment_button .comments_amount {
+  font-size: 20px;
+  color: #888;
+  font-weight: 900;
+  margin-left: 20px;
+  margin-top: 0px;
+}
+
+.commentBox{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  margin-left:  60px;
+  height: auto;
+  width: 90%;
+}
+
+.commentInput{
+  display: flex;
+  width: 75%;
+  background: transparent;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 20px 10px 20px;
+  margin: 0px 0px 20px 20px;
+  outline: none;
+  flex-grow: 1;
+  overflow-y: hidden;
+  resize: none;
+  height: auto;
+}
+
+.commentPost{
+  /* display: flex; */
+  padding: 13px 10px;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  /* margin: 0px 20px 20px 0px; */
+  margin-left: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+.comment{
+  width: 90%;
+  max-height: 250px;
+  overflow-y: scroll;
+  margin-left: 80px;
+  margin-top: 20px;
+}
+
+.commentWrapper{
+  display: flex;
+  align-items: center;
+  border-top: 1px dashed black;
+  width: 90%;
+  margin: auto;
+}
+
+.postCommentText {
+  display: flex;
+  margin-left: 950px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.commentInfo {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  max-width: 80%;
+}
+
+.commentContent {
+  display: flex;
+  align-items: center;
+}
+
+.commentUsername {
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.logo1 {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  padding:5px;
+  border: 2px solid var(--border_color);
+  border-radius: 50px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.commentText {
+  margin-top: 3px;
+}
+
+.commentInText {
+  margin-left: 45px; /* ปรับตามความเหมาะสม */
+}
+
+.bookmark {
+  display: flex;
+  left: 50px
+}
