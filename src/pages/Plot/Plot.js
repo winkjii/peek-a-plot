@@ -8,6 +8,7 @@ import { getDocs, collection, addDoc } from "firebase/firestore";
 import { AuthContext } from "../../firebase/AuthContext";
 import { ThemeContext } from "../../components/Toggle/ContextProvider";
 import { Toggle } from "../../components/Toggle/Toggle";
+import Dropdown from "../../components/Dropdown/Dropdown";
 
 
 const Plot = () => {
@@ -21,11 +22,26 @@ const Plot = () => {
 
   // New Plot
   const [newPlotName, setNewPlotName] = useState("");
+  const [newGenre, setNewGenre] = useState([null, null, null]);
+  const [newHashtag, setNewHashtag] = useState("");
   const [newPlotDetail, setNewPlotDetail] = useState("");
   const [newPlotCharacter, setNewPlotCharacter] = useState("");
   const [newPlotTimeline, setNewPlotTimeline] = useState("");
   const [currentUserUsername, setCurrentUserUsername] = useState("");
+
+  const options = [
+    { value: null, label: "ไม่ระบุ" },
+    { value: "ลึกลับ (Mystery)", label: "ลึกลับ (Mystery)" },
+    { value: "แฟนตาซี (Fantasy)", label: "แฟนตาซี (Fantasy)" },
+    { value: "รักโรแมนติก (Romance)", label: "รักโรแมนติก (Romance)" },
+    { value: "สืบสวนสอบสวน (Suspense)", label: "สืบสวนสอบสวน (Suspense)" },
+    { value: "อิงประวัติศาสตร์ (Historical)", label: "อิงประวัติศาสตร์ (Historical)" },
+    { value: "วิทยาศาสตร์ (Science Fiction)", label: "วิทยาศาสตร์ (Science Fiction)" },
+    { value: "ระทึกขวัญ/สยองขวัญ (Thriller/Horror)", label: "ระทึกขวัญ/สยองขวัญ (Thriller/Horror)" },
+  ];
   
+  console.log("genre", newGenre);
+
   useEffect(() => {
     const fetchUsername = async () => {
       try {
@@ -51,6 +67,8 @@ const Plot = () => {
     try {
       await addDoc(plotCollectionRef, {
         name: newPlotName,
+        genre: newGenre,
+        hashtag: newHashtag,
         plot: newPlotDetail,
         character: newPlotCharacter,
         timeline: newPlotTimeline,
@@ -83,6 +101,33 @@ const Plot = () => {
           onChange={(e) => setNewPlotName(e.target.value)}
           rows={8}
           maxLength="50"
+        />
+        <br />
+        <label class={styles.title} htmlFor="genre">
+          Genre
+        </label>
+        <label class={styles.describe}>
+          ประเภท หรือหมวดหมู่ของพล็อต สามารถเลือกได้สูงสุด 3 หมวดหมู่
+        </label>
+        <div className={styles.genre}>
+        <Dropdown options={options} onChange={(e) => setNewGenre([e.value, newGenre[1], newGenre[2],])} value={newGenre[0]} placeholder={"ไม่ระบุ"}/>
+        <Dropdown className={styles.genreContainer} controlClassName={styles.genreResult} menuClassName={styles.genreChoice} arrowClassName={styles.arrow} options={options} onChange={(e) => setNewGenre([newGenre[0], e.value, newGenre[2]])} value={newGenre[1]} placeholder={"ไม่ระบุ"}/>
+        <Dropdown className={styles.genreContainer} controlClassName={styles.genreResult} menuClassName={styles.genreChoice} arrowClassName={styles.arrow} options={options} onChange={(e) => setNewGenre([newGenre[0], newGenre[1], e.value])} value={newGenre[3]} placeholder={"ไม่ระบุ"}/>
+        </div>
+        <br />
+        <label class={styles.title} htmlFor="hashtag">
+          Hashtag
+        </label>
+        <label class={styles.describe}>
+          แฮชแท็กหรือแท็กเพิ่มเติมเกี่ยวกับพล็อต
+        </label>
+        <textarea
+          id="hashtag"
+          name="hashtag"
+          value={newHashtag}
+          onChange={(e) => setNewHashtag(e.target.value)}
+          rows={8}
+          maxLength="250"
         />
         <br />
         <label class={styles.title} htmlFor="plot">

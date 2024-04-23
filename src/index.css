@@ -3,6 +3,7 @@
   --color: black;
   --border_color: black;
   --link_color: navy;
+  --hashtag_color: #283993;
 }
 
 [data-theme="dark"] {
@@ -10,6 +11,7 @@
   --color: white;
   --border_color: #262626;
   --link_color: cyan;
+  --hashtag_color: #91ccff;
 }
 
 * {
