@@ -13,8 +13,10 @@ textarea {
   resize: none;
   border-width: 1px;
   border-radius: 20px;
+  border-color: #541C9C;
   padding: 10px;
   margin-bottom: 20px;
+  color: #541C9C;
 }
 
 .title {

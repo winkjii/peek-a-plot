@@ -1,0 +1,165 @@
+.container {
+    height: 100%;
+    /* background-color: black; */
+  }
+  
+  .plotSummary {
+    max-width: 1600px;
+    border: 2px solid var(--border_color);
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items:baseline;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .logo {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border: 2px solid var(--border_color);
+    border-radius: 50px;
+    margin-left: 40px;
+  }
+  
+  .username {
+    margin-left: 10px;
+    color: var(--color);
+  }
+  
+  .detail_plot {
+    margin-left: 80px;
+    margin-bottom: 20px;
+    color: var(--color);
+  }
+  
+  /* like button styles */
+  
+  .like_button .heart_icon {
+    height: 70px;
+    width: 70px;
+    background: url("../../assets/heart.png") no-repeat;
+    background-position: left;
+    background-size: 2900%;
+    cursor: pointer;
+    position: absolute;
+  }
+  
+  .like_button .heart_icon.liked {
+    animation: like-anim 0.7s steps(28) forwards;
+  }
+  
+  @keyframes like-anim {
+    to {
+      background-position: right;
+    }
+  }
+  
+  .like_button .heart_bg {
+    background: rgba(255, 192, 200, 0);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 100ms ease;
+  }
+  
+  .like_button .heart_bg:hover {
+    background: rgba(255, 192, 200, 0.7);
+  }
+  
+  .like_button {
+    display: flex;
+    align-items: center;
+    /* margin-left: 60px; */
+  }
+  
+  .like_button .likes_amount {
+    font-size: 20px;
+    color: #888;
+    font-weight: 900;
+    margin-left: 6px;
+  }
+  
+  /* comment button styles */
+  .action_buttons {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* ปรับเพิ่ม margin-left เพื่อช่วยให้ comment button อยู่ห่างจาก like button */
+    margin-right: 20px;
+    justify-content: space-between;
+  }
+  
+  
+  .logo1 {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border: 2px solid var(--border_color);
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .commentText {
+    color: var(--color);
+    margin-top: 3px;
+  }
+  
+  .commentInText {
+    margin-left: 45px; /* ปรับตามความเหมาะสม */
+  }
+
+
+  
+  .action_buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .edit_button,
+  .delete_button {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .delete_button {
+    margin-left: 10px; /* เพื่อให้ระยะห่างระหว่างปุ่ม bin และ edit */
+  }
+
+  .hashtag {
+    color: var(--hashtag_color);
+  }
+
+  .genreContainer {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+  
+  }
+  .genre {
+    color: var(--color);
+    border: 1px solid var(--color);
+    border-radius: 20px;
+    padding: 3px 20px;
+    margin: 0px;
+    font-size: 12px;
+  }
+  
+
+
+
+
+  

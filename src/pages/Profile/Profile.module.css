@@ -4,7 +4,7 @@
 }
 
 .head {
-    background-color: black;
+    background-color: #541C9C;
     border-bottom: 1px solid var(--border_color);
     min-height: 45%;
     display: flex;
@@ -53,7 +53,7 @@
 input {
     height: 35px;
     border-radius: 20px;
-    border: 1px solid;
+    border: 1px solid #541C9C;
     padding: 5px 10px;
     
 }
@@ -63,7 +63,4 @@ input {
     flex-direction: row;
     justify-content: end;
     margin-right: 25px;
-    /* height: 100%; */
-    /* margin-top: 5%; */
-    /* margin-bottom: 20px;  */
 }

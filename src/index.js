@@ -16,9 +16,12 @@ import Plot from "./pages/Plot/Plot";
 import App from "./App";
 import ThemeContextProvider from "./components/Toggle/ContextProvider";
 
+
 import { AuthContextProvider } from "./firebase/AuthContext";
 import TrendingList from "./pages/Trend/Trend";
 import Bookmark from "./pages/Bookmark/Bookmark";
+import EditPlotPage from "./pages/EditPlotPage/EditPlotPage";
+
 
 const router = createBrowserRouter([
   {
@@ -57,6 +60,10 @@ const router = createBrowserRouter([
   {
     path: "/bookmark",
     element: <Bookmark />,
+  },
+  {
+    path: "/edit-plot/:plotId",
+    element: <EditPlotPage />,
   },
 ]);
 

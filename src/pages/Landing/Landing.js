@@ -2,7 +2,7 @@ import logo from "../../assets/logo.png";
 import tel from "../../assets/telephone.png";
 import x from "../../assets/x.jpg";
 import howTo1 from "../../assets/howTo-1.png";
-import howTo2 from "../../assets/howTo-2.jpg";
+import howTo2 from "../../assets/howTo-2.png";
 import howTo3 from "../../assets/howTo-3.png";
 import email from "../../assets/email.png";
 import styles from "./Landing.module.css";
@@ -81,7 +81,7 @@ export default function Landing() {
           <ButtonSemantic
             title={"Get started"}
             path={"/sign-up"}
-            theme={"black"}
+            theme={"#541C9C"}
             fontSize={13}
           />
         </div>
@@ -96,7 +96,7 @@ export default function Landing() {
             title={"Start Writing"}
             path={"/sign-up"}
             theme={"white"}
-            color={"black"}
+            color={"#541C9C"}
             width={210}
             height={37}
           />

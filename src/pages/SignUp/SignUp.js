@@ -126,13 +126,19 @@ const SignUp = () => {
             secureTextEntry
           />
         </div>
-        <ButtonSemantic
-          title="Sign up"
-          onClick={handleSignUp}
-          theme={"black"}
-        />
-        <div className={styles.signin} onClick={handleSignIn}>
-          Sign in
+        <div className={styles.btContainer}>
+          <ButtonSemantic
+            title="Sign up"
+            onClick={handleSignUp}
+            theme={"#541C9C"}
+            width={150}
+            height={35}
+          />
+        </div>
+        <div className={styles.btContainer1}>
+          <div className={styles.signin} onClick={handleSignIn}>
+            Sign in
+          </div>
         </div>
       </div>
     </div>
