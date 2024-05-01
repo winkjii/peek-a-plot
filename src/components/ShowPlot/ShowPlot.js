@@ -30,6 +30,7 @@ const ShowPlot = ({ plot, plotId }) => {
   const [bookmarked, setBookmarked] = useState(false);
   const [bookmarks, setBookmarks] = useState([]);
   const [bookmarkId, setBookmarkId] = useState([]);
+  const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const { isDark } = useContext(ThemeContext);
 
@@ -116,10 +117,10 @@ const ShowPlot = ({ plot, plotId }) => {
   };
 
   useEffect(() => {
-    const unSub = onSnapshot(
-      collection(db, "bookmarks"),
-      (snapshot) => setBookmarks(snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() })))
-
+    const unSub = onSnapshot(collection(db, "bookmarks"), (snapshot) =>
+      setBookmarks(
+        snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+      )
     );
     return () => {
       unSub();
@@ -127,11 +128,15 @@ const ShowPlot = ({ plot, plotId }) => {
   }, [plotId]);
 
   useEffect(() => {
-    console.log('click')
+    console.log("click");
     setBookmarked(
-      bookmarks.findIndex((bookmark) => bookmark.data.uid === currentUser?.uid && bookmark.data.plotId === plotId) !== -1
+      bookmarks.findIndex(
+        (bookmark) =>
+          bookmark.data.uid === currentUser?.uid &&
+          bookmark.data.plotId === plotId
+      ) !== -1
     );
-    bookmarks.map((data) => setBookmarkId(data.id))
+    bookmarks.map((data) => setBookmarkId(data.id));
   }, [bookmarks, currentUser.uid]);
 
   // const handleBookmark = async (e) => {
@@ -185,35 +190,61 @@ const ShowPlot = ({ plot, plotId }) => {
           <p>
             <b>Timeline:</b> {plot.data.timeline}
           </p>
+          <p className={styles.hashtag}>{plot.data?.hashtag}</p>
+          {plot.data?.genre != null ? (
+            <div className={styles.genreContainer}>
+            {plot.data.genre[0] != null ? <p className={styles.genre}>{plot.data.genre[0]}</p> : null}
+            {plot.data.genre[1] != null ? <p className={styles.genre}>{plot.data.genre[1]}</p> : null}
+            {plot.data.genre[2] != null ? <p className={styles.genre}>{plot.data.genre[2]}</p> : null}
+            </div>
+          ) : null}
 
           {/* <div style={{width: }}> */}
           <div className={styles.action_buttons}>
-          <div className={styles.like_comment}>
-            <div className={styles.like_button} onClick={() => likePost()}>
-              <div className={styles.heart_bg}>
-                <div
-                  className={`${styles.heart_icon} ${
-                    liked ? styles.liked : ""
-                  }`}
-                ></div>
+            <div className={styles.like_comment}>
+              <div className={styles.like_button} onClick={() => likePost()}>
+                <div className={styles.heart_bg}>
+                  <div
+                    className={`${styles.heart_icon} ${
+                      liked ? styles.liked : ""
+                    }`}
+                  ></div>
+                </div>
+                <span className={styles.likes_amount}>{likes.length}</span>
               </div>
-              <span className={styles.likes_amount}>{likes.length}</span>
-            </div>
-            {/* </div> */}
-            <div
-              className={styles.comment_button}
-              onClick={() => {
-                setCommentOpen(!commentOpen);
-                setCommentBoxVisible(!commentBoxVisible);
-              }}
-            >
-              {/* <div className={styles.comment_button} onClick={() => {setCommentBoxVisible(!commentBoxVisible)}}> */}
-              {isDark ? <img src={comment} alt="" className={styles.comment_icon_dark} /> : <img src={comment} alt="" className={styles.comment_icon} />}
-              <span className={styles.comments_amount}>{comments.length}</span>
-            </div>
+              {/* </div> */}
+              <div
+                className={styles.comment_button}
+                onClick={() => {
+                  setCommentOpen(!commentOpen);
+                  setCommentBoxVisible(!commentBoxVisible);
+                }}
+              >
+                {/* <div className={styles.comment_button} onClick={() => {setCommentBoxVisible(!commentBoxVisible)}}> */}
+                {isDark ? (
+                  <img
+                    src={comment}
+                    alt=""
+                    className={styles.comment_icon_dark}
+                  />
+                ) : (
+                  <img src={comment} alt="" className={styles.comment_icon} />
+                )}
+                <span className={styles.comments_amount}>
+                  {comments.length}
+                </span>
+              </div>
             </div>
             <div className={styles.bookmark} onClick={() => handleBookmark()}>
-              {isDark ? <img src={bookmarked ? bookmarkBlack : bookmark} width={25} className={styles.bookmarkDark}/> : <img src={bookmarked ? bookmarkBlack : bookmark} width={25} />}
+              {isDark ? (
+                <img
+                  src={bookmarked ? bookmarkBlack : bookmark}
+                  width={25}
+                  className={styles.bookmarkDark}
+                />
+              ) : (
+                <img src={bookmarked ? bookmarkBlack : bookmark} width={25} />
+              )}
             </div>
             {/* <div>
                   <span 

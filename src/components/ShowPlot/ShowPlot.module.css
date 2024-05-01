@@ -37,6 +37,23 @@
   color: var(--color);
 }
 
+.hashtag {
+  color: var(--hashtag_color);
+}
+.genreContainer {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+
+}
+.genre {
+  color: var(--color);
+  border: 1px solid var(--color);
+  border-radius: 20px;
+  padding: 3px 20px;
+  margin: 0px;
+  font-size: 12px;
+}
 /* like button styles */
 
 .like_button .heart_icon {

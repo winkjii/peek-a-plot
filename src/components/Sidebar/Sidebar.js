@@ -23,6 +23,10 @@ export default function Sidebar({ children }) {
       path: "/bookmark",
     },
     {
+      title: "Lists",
+      path: "/lists",
+    },
+    {
       title: "Trend",
       path: "/trend",
     },
@@ -67,19 +71,13 @@ export default function Sidebar({ children }) {
             title={"Plot"}
             path={"/plot"}
             theme={"white"}
-            color={"black"}
+            color={"#541C9C"}
             width={130}
             fontSize={17}
           />
-          {/* <Link
-            className={styles.b_signout}
-            to="/"
-            style={{ textDecoration: "none", color: "white" }}
-          > */}
           <div className={styles.b_signout} onClick={logout}>
             Sign out
           </div>
-          {/* </Link> */}
         </div>
       </div>
       <div className={styles.children}>{children}</div>

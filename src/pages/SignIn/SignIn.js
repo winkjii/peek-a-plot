@@ -55,15 +55,18 @@ const SignIn = () => {
             secureTextEntry
           />
         </div>
-        <ButtonSemantic
-          title="Sign in"
-          onClick={handleSignIn}
-          theme={"black"}
-          fontWeight={700}
-          fontSize={14}
-          width={180}
-          height={32}
-        />
+        <div className={styles.btContainer}>
+          <ButtonSemantic
+            title="Sign in"
+            onClick={handleSignIn}
+            theme={"#541C9C"}
+            fontWeight={700}
+            fontSize={14}
+            width={150}
+            height={35}
+          />
+        </div>
+        
       </div>
     </div>
   );

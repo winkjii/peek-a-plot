@@ -119,7 +119,7 @@ const Profile = () => {
         <div className={styles.button}>
           <ButtonOutline
             onClick={() => navigate("/home")}
-            title={"Cancle"}
+            title={"Cancel"}
             width={"160px"}
             margin={"0px 20px"}
           />

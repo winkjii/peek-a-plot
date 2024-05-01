@@ -1,33 +1,28 @@
-// import React from 'react'
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
-import styles from "./Plot.module.css";
+import styles from "./EditPlotPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase/firebase";
-import { getDocs, collection, addDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { AuthContext } from "../../firebase/AuthContext";
 import { ThemeContext } from "../../components/Toggle/ContextProvider";
 import { Toggle } from "../../components/Toggle/Toggle";
 import Dropdown from "../../components/Dropdown/Dropdown";
+import { useParams } from "react-router-dom"; 
 
-
-const Plot = () => {
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>;
+const EditPlot = () => {
+  const { plotId } = useParams(); 
   const { isDark } = useContext(ThemeContext);
-
   const navigate = useNavigate();
-  const plotCollectionRef = collection(db, "plots");
-  const userCollectionRef = collection(db, "users");
+  const plotCollectionRef = doc(db, "plots", plotId);
   const { currentUser } = useContext(AuthContext);
-
-  // New Plot
-  const [newPlotName, setNewPlotName] = useState("");
-  const [newGenre, setNewGenre] = useState([null, null, null]);
-  const [newHashtag, setNewHashtag] = useState("");
-  const [newPlotDetail, setNewPlotDetail] = useState("");
-  const [newPlotCharacter, setNewPlotCharacter] = useState("");
-  const [newPlotTimeline, setNewPlotTimeline] = useState("");
-  const [currentUserUsername, setCurrentUserUsername] = useState("");
+  const [plotData, setPlotData] = useState(null); // State เก็บข้อมูล plot ที่จะแก้ไข
+  const [updatedPlotName, setUpdatedPlotName] = useState("");
+  const [updatedGenre, setUpdatedGenre] = useState([null, null, null]);
+  const [updatedHashtag, setUpdatedHashtag] = useState("");
+  const [updatedPlotDetail, setUpdatedPlotDetail] = useState("");
+  const [updatedPlotCharacter, setUpdatedPlotCharacter] = useState("");
+  const [updatedPlotTimeline, setUpdatedPlotTimeline] = useState("");
 
   const options = [
     { value: null, label: "ไม่ระบุ" },
@@ -39,47 +34,48 @@ const Plot = () => {
     { value: "วิทยาศาสตร์ (Science Fiction)", label: "วิทยาศาสตร์ (Science Fiction)" },
     { value: "ระทึกขวัญ/สยองขวัญ (Thriller/Horror)", label: "ระทึกขวัญ/สยองขวัญ (Thriller/Horror)" },
   ];
-  
-  console.log("genre", newGenre);
 
   useEffect(() => {
-    const fetchUsername = async () => {
+    const fetchPlotData = async () => {
       try {
-        const querySnapshot = await getDocs(userCollectionRef);
-        querySnapshot.forEach((doc) => {
-          if (doc.id === currentUser.uid) {
-            setCurrentUserUsername(doc.data().displayName);
-          }
-        });
+        const plotDocRef = doc(db, "plots", plotId);
+        const plotSnapshot = await getDoc(plotDocRef);
+        if (plotSnapshot.exists()) {
+          const plotData = plotSnapshot.data();
+          setPlotData(plotData);
+          // เซ็ตค่า state ให้มีค่าเท่ากับข้อมูล plot ที่ดึงมาจาก Firebase
+          setUpdatedPlotName(plotData.name || "");
+          setUpdatedGenre(plotData.genre || [null, null, null]);
+          setUpdatedHashtag(plotData.hashtag || "");
+          setUpdatedPlotDetail(plotData.plot || "");
+          setUpdatedPlotCharacter(plotData.character || "");
+          setUpdatedPlotTimeline(plotData.timeline || "");
+        } else {
+          console.log("Plot not found");
+        }
       } catch (error) {
-        console.error("Error fetching username:", error);
+        console.error("Error fetching plot data:", error);
       }
     };
 
-    fetchUsername();
-  }, [currentUser, userCollectionRef]);
-  
+    fetchPlotData();
+  }, [currentUser]);
 
-  const handleSubmit = async (e) => {
-    console.log("submit")
-    e.preventDefault();
-
+  const handleUpdatePlot = async () => {
     try {
-      await addDoc(plotCollectionRef, {
-        name: newPlotName,
-        genre: newGenre,
-        hashtag: newHashtag,
-        plot: newPlotDetail,
-        character: newPlotCharacter,
-        timeline: newPlotTimeline,
-        like: 0,
-        plotOwner: currentUserUsername, // ใช้ currentUser.uid เป็นเจ้าของพล็อต
-        plotOwnerId: currentUser.uid,
-        timestamp: new Date(),
+      
+      await updateDoc(plotCollectionRef, {
+        name: updatedPlotName,
+        genre: updatedGenre,
+        hashtag: updatedHashtag,
+        plot: updatedPlotDetail,
+        character: updatedPlotCharacter,
+        timeline: updatedPlotTimeline,
       });
-      navigate("/home");
-    } catch (err) {
-      console.error(err);
+      console.log("Plot updated successfully!");
+      navigate("/lists");
+    } catch (error) {
+      console.error("Error updating plot:", error);
     }
   };
 
@@ -97,8 +93,8 @@ const Plot = () => {
         <textarea
           id="title"
           name="title"
-          value={newPlotName}
-          onChange={(e) => setNewPlotName(e.target.value)}
+          value={updatedPlotName}
+          onChange={(e) => setUpdatedPlotName(e.target.value)}
           rows={8}
           maxLength="50"
         />
@@ -110,9 +106,9 @@ const Plot = () => {
           ประเภท หรือหมวดหมู่ของพล็อต สามารถเลือกได้สูงสุด 3 หมวดหมู่
         </label>
         <div className={styles.genre}>
-        <Dropdown options={options} onChange={(e) => setNewGenre([e.value, newGenre[1], newGenre[2],])} value={newGenre[0]} placeholder={"ไม่ระบุ"}/>
-        <Dropdown className={styles.genreContainer} controlClassName={styles.genreResult} menuClassName={styles.genreChoice} arrowClassName={styles.arrow} options={options} onChange={(e) => setNewGenre([newGenre[0], e.value, newGenre[2]])} value={newGenre[1]} placeholder={"ไม่ระบุ"}/>
-        <Dropdown className={styles.genreContainer} controlClassName={styles.genreResult} menuClassName={styles.genreChoice} arrowClassName={styles.arrow} options={options} onChange={(e) => setNewGenre([newGenre[0], newGenre[1], e.value])} value={newGenre[3]} placeholder={"ไม่ระบุ"}/>
+        <Dropdown options={options} onChange={(e) => setUpdatedGenre([e.value, updatedGenre[1], updatedGenre[2],])} value={updatedGenre[0]} placeholder={"ไม่ระบุ"}/>
+        <Dropdown className={styles.genreContainer} controlClassName={styles.genreResult} menuClassName={styles.genreChoice} arrowClassName={styles.arrow} options={options} onChange={(e) => setUpdatedGenre([updatedGenre[0], e.value, updatedGenre[2]])} value={updatedGenre[1]} placeholder={"ไม่ระบุ"}/>
+        <Dropdown className={styles.genreContainer} controlClassName={styles.genreResult} menuClassName={styles.genreChoice} arrowClassName={styles.arrow} options={options} onChange={(e) => setUpdatedGenre([updatedGenre[0], updatedGenre[1], e.value])} value={updatedGenre[3]} placeholder={"ไม่ระบุ"}/>
         </div>
         <br />
         <label class={styles.title} htmlFor="hashtag">
@@ -124,8 +120,8 @@ const Plot = () => {
         <textarea
           id="hashtag"
           name="hashtag"
-          value={newHashtag}
-          onChange={(e) => setNewHashtag(e.target.value)}
+          value={updatedHashtag}
+          onChange={(e) => setUpdatedHashtag(e.target.value)}
           rows={8}
           maxLength="250"
         />
@@ -139,8 +135,8 @@ const Plot = () => {
         <textarea
           id="plot"
           name="plot"
-          value={newPlotDetail}
-          onChange={(e) => setNewPlotDetail(e.target.value)}
+          value={updatedPlotDetail}
+          onChange={(e) => setUpdatedPlotDetail(e.target.value)}
           rows={13}
           maxLength="250"
         />
@@ -152,8 +148,8 @@ const Plot = () => {
         <textarea
           id="characters"
           name="characters"
-          value={newPlotCharacter}
-          onChange={(e) => setNewPlotCharacter(e.target.value)}
+          value={updatedPlotCharacter}
+          onChange={(e) => setUpdatedPlotCharacter(e.target.value)}
           rows={13}
           maxLength="250"
         />
@@ -167,18 +163,22 @@ const Plot = () => {
         <textarea
           id="timeframe"
           name="timeframe"
-          value={newPlotTimeline}
-          onChange={(e) => setNewPlotTimeline(e.target.value)}
+          value={updatedPlotTimeline}
+          onChange={(e) => setUpdatedPlotTimeline(e.target.value)}
           rows={13}
           maxLength="250"
         />
         <br />
         <div className={styles.buttonContainer}>
-          <button type="submit" onClick={handleSubmit}>Post</button>
+          <button type="button" onClick={ handleUpdatePlot}>Post</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Plot;
+export default EditPlot;
+
+
+
+
